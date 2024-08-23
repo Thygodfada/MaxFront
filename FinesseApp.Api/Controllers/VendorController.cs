@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinesseApp.Api.Controllers
 {
-	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class VendorController : ControllerBase

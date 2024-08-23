@@ -1,3 +1,4 @@
+using Finesse.Infrastructure;
 using Finesse.Infrastructure.ApplicationDbContext;
 using FinesseApp.Business;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,6 +42,16 @@ builder.Services.AddSwaggerGen( c =>
 		}
 	});
 });
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAllOrigins",
+		builder =>
+		{
+			builder.AllowAnyOrigin()
+				   .AllowAnyMethod()
+				   .AllowAnyHeader();
+		});
+});
 
 
 builder.Services.AddAuthentication(options =>
@@ -72,10 +83,18 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ticket Ease v1"));
 }
 
+using (var scope = app.Services.CreateScope())
+{
+	var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+	ApplicationDbContextSeed.Seed(dbContext);
+}
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+
 
 app.Run();
