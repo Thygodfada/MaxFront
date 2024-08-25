@@ -15,7 +15,7 @@ DIConfiguration.RegisterServices(builder.Services);
 builder.Services.AddScoped<ApplicationDbContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen( c =>
+builder.Services.AddSwaggerGen(c =>
 {
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen( c =>
 		Scheme = "Bearer",
 		BearerFormat = "JWT",
 		In = ParameterLocation.Header,
-		Description = "Please enter your JWT token in the format **'Bearer {token}'**"
+		Description = "Please enter your JWT token"
 	});
 
 	c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -38,10 +38,11 @@ builder.Services.AddSwaggerGen( c =>
 					Id = "Bearer"
 				}
 			},
-			new string[] { }
+			new string[] {}
 		}
 	});
 });
+
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowAllOrigins",
@@ -54,11 +55,7 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddAuthentication(options =>
-{
-	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
 	options.TokenValidationParameters = new TokenValidationParameters

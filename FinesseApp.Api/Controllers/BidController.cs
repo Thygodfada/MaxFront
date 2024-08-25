@@ -51,7 +51,7 @@ public class BidController : ControllerBase
 
 
 	[HttpGet("{vendorId}")]
-	public async Task<IActionResult> GetBidsByVendorId(int vendorId)
+	public async Task<IActionResult> GetBidsByVendorId(string vendorId)
 	{
 		var bids = await _bidService.GetBidsByVendorIdAsync(vendorId);
 			if (bids == null || !bids.Any())

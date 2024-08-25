@@ -21,7 +21,7 @@ public class BidService : IBidService
 		return bid;
 	}
 
-	public async Task<IEnumerable<Bid>> GetBidsByVendorIdAsync(int vendorId)
+	public async Task<IEnumerable<Bid>> GetBidsByVendorIdAsync(string vendorId)
 	{
 		return await unitOfWork.Bids.Find(b => b.VendorId == vendorId).ToListAsync();
 	}

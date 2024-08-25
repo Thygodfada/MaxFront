@@ -2,7 +2,7 @@
 
 public class Bid : BaseEntity
 {
-	public int VendorId { get; set; }
+	public string VendorId { get; set; } = default!;
 	public Vendor Vendor { get; set; } = default!;
 	public int ProjectId { get; set; }
 	public Project Project { get; set; } = default!;

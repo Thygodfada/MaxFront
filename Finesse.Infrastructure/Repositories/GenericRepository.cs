@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Finesse.Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly ApplicationDbContext.ApplicationDbContext applicationDbContext;
         private DbSet<T> DbSet;

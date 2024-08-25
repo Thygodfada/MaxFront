@@ -13,8 +13,8 @@ public class ApplicationDbContextSeed
 		if (!context.Vendors.Any())
 		{
 			context.Vendors.AddRange(
-				new Vendor { Id = 1, Name = "Vendor One", Email = "vendor1@example.com", Password = "password", RegisteredAt = DateTime.Now},
-				new Vendor { Id = 2, Name = "Vendor Two", Email = "vendor2@example.com", Password = "password", RegisteredAt = DateTime.Now }
+				new Vendor { Id = "1", Name = "Vendor One", Email = "vendor1@example.com", Password = "password", RegisteredAt = DateTime.Now},
+				new Vendor { Id = "2", Name = "Vendor Two", Email = "vendor2@example.com", Password = "password", RegisteredAt = DateTime.Now }
 			);
 
 			
